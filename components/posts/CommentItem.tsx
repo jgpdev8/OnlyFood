@@ -3,6 +3,8 @@ import { useCallback, useMemo } from 'react';
 import { formatDistanceToNowStrict } from 'date-fns';
 
 import Avatar from '../Avatar';
+import { format } from 'path';
+import { es } from 'date-fns/locale';
 
 interface CommentItemProps {
   data: Record<string, any>;
@@ -21,8 +23,9 @@ const CommentItem: React.FC<CommentItemProps> = ({ data = {} }) => {
     if (!data?.createdAt) {
       return null;
     }
-
-    return formatDistanceToNowStrict(new Date(data.createdAt));
+    let timePost = '';
+    timePost = formatDistanceToNowStrict(new Date(data.createdAt));
+    return timePost;
   }, [data.createdAt])
 
   return (
