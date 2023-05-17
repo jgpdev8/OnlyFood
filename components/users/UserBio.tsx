@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { BiCalendar } from "react-icons/bi";
 import { format } from "date-fns";
+import { es } from 'date-fns/esm/locale'
 
 import useCurrentUser from "@/hooks/useCurrentUser";
 import useUser from "@/hooks/useUser";
@@ -25,8 +26,10 @@ const UserBio: React.FC<UserBioProps> = ({ userId }) => {
     if (!fetchedUser?.createdAt) {
       return null;
     }
+    let fecha = format(new Date(fetchedUser.createdAt),"MMMM 'del' yyyy", {locale:es});
+    fecha = fecha.replace(fecha.charAt(0),fecha.charAt(0).toUpperCase());
+    return fecha;
 
-    return format(new Date(fetchedUser.createdAt), 'MMMM yyyy');
   }, [fetchedUser?.createdAt])
 
 

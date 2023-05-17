@@ -36,12 +36,12 @@ const Form: React.FC<FormProps> = ({ placeholder, isComment, postId }) => {
 
       await axios.post(url, { body });
 
-      toast.success('Tweet created');
+      toast.success('FoodIt Creado');
       setBody('');
       mutatePosts();
       mutatePost();
     } catch (error) {
-      toast.error('Something went wrong');
+      toast.error('Algo Fue Mal');
     } finally {
       setIsLoading(false);
     }
@@ -84,7 +84,7 @@ const Form: React.FC<FormProps> = ({ placeholder, isComment, postId }) => {
                 transition"
             />
             <div className="mt-4 flex flex-row justify-end">
-              <Button disabled={isLoading || !body} onClick={onSubmit} label="Tweet" />
+              <Button disabled={isLoading || !body} onClick={onSubmit} label="Food It!" />
             </div>
           </div>
         </div>
