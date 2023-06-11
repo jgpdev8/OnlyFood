@@ -25,13 +25,7 @@ interface ListPostItemProps {
 
 const ListPostItem: React.FC<ListPostItemProps> = ({ data = {}, userId }) => {
   const router = useRouter();
-  const loginModal = useLoginModal();
-
-  const { data: currentUser } = useCurrentUser();
-  const { hasLiked,isLoading,toggleLike } = useLike({ postId: data.id, userId});
-  const { isListed,isLoadingSave,toggleAddList } = useAddList({ postId: data.id,userId});
   const [abierto, setAbierto] = useState(false);
-  const [copied, setCopied] = useState(false);
 
  
 
@@ -47,39 +41,6 @@ const ListPostItem: React.FC<ListPostItemProps> = ({ data = {}, userId }) => {
     router.push(`/posts/${data.id}`);
   }, [router, data.id]);
 
-  const onLike = useCallback(async (ev: any) => {
-    ev.stopPropagation();
-
-    if (!currentUser) {
-      return loginModal.onOpen();
-    }
-
-    if(!isLoading){
-      toggleLike();
-    }
-
-    
-  }, [loginModal, currentUser, toggleLike]);
-
-  const onAddList = useCallback(async (ev: any) => {
-    ev.stopPropagation();
-    if (!currentUser) {
-      return loginModal.onOpen();
-      
-    }
-    if(!isLoadingSave){
-      toggleAddList();
-    }
-  },[loginModal,currentUser,toggleAddList])
-  
-  const handleModal = (ev:any) =>{
-    ev.stopPropagation();
-    if(abierto){
-      setAbierto(false)
-    }else{
-      setAbierto(true)
-    }    
-  }
 
   let locationLink = 'https://www.google.com/maps?q=' + data.location;
 
@@ -101,8 +62,6 @@ const ListPostItem: React.FC<ListPostItemProps> = ({ data = {}, userId }) => {
   }
   
 
-  const LikeIcon = hasLiked ? AiFillHeart : AiOutlineHeart;
-  const ListedIcon = isListed ? BsFillBookmarkFill : BsBookmark;
 
   const createdAt = useMemo(() => {
     if (!data?.createdAt) {
@@ -114,7 +73,6 @@ const ListPostItem: React.FC<ListPostItemProps> = ({ data = {}, userId }) => {
 
   return (
     <>
-    {abierto && (<ConfirmationModal postId={data.id} userId={userId} handleModal={handleModal} />)}
     <div 
       onClick={goToPost}
       className="

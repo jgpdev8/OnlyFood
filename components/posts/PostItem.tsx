@@ -31,7 +31,6 @@ const PostItem: React.FC<PostItemProps> = ({ data = {}, userId }) => {
   const { hasLiked,isLoading,toggleLike } = useLike({ postId: data.id, userId});
   const { isListed,isLoadingSave,toggleAddList } = useAddList({ postId: data.id,userId});
   const [abierto, setAbierto] = useState(false);
-  const [copied, setCopied] = useState(false);
 
  
 
@@ -237,21 +236,6 @@ const PostItem: React.FC<PostItemProps> = ({ data = {}, userId }) => {
             hover:text-red-500
             '>
               {currentUser?.id == data.user.id && (<AiOutlineDelete size={20}></AiOutlineDelete>)}            
-            </div>
-
-            <div 
-            onClick={handleModal}
-            className='
-            flex 
-            flex-row 
-            items-center 
-            text-neutral-500 
-            gap-2 
-            cursor-pointer 
-            transition 
-            hover:text-red-500
-            '>
-              <AiOutlineCopy size={20}></AiOutlineCopy>           
             </div>
           </div>
         </div>
