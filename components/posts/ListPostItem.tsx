@@ -1,23 +1,11 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { AiFillHeart, AiOutlineHeart, AiOutlineMessage } from 'react-icons/ai';
+import { useCallback, useMemo } from 'react';
 import { formatDistanceToNowStrict } from 'date-fns';
-import {AiOutlineDelete} from 'react-icons/ai'
 import {TiLocation} from 'react-icons/ti'
-import {AiOutlineCopy} from 'react-icons/ai'
-
-
-import useLoginModal from '@/hooks/useLoginModal';
-import ConfirmationModal from '../modals/ConfirmationModal';
-import useCurrentUser from '@/hooks/useCurrentUser';
-import useLike from '@/hooks/useLike';
 
 import Avatar from '../Avatar';
 import Link from 'next/link';
-import { BsFillBookmarkFill,BsBookmark } from 'react-icons/bs';
-import useAddList from '@/hooks/useAddList';
-import usePosts from '@/hooks/usePosts';
 interface ListPostItemProps {
   data: Record<string, any>;
   userId?: string;
@@ -25,7 +13,6 @@ interface ListPostItemProps {
 
 const ListPostItem: React.FC<ListPostItemProps> = ({ data = {}, userId }) => {
   const router = useRouter();
-  const [abierto, setAbierto] = useState(false);
 
  
 

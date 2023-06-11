@@ -1,8 +1,6 @@
 
 import useCurrentUser from "@/hooks/useCurrentUser";
-import PostItem from "./posts/PostItem";
 import usePosts from "@/hooks/usePosts";
-import { useEffect, useState } from "react";
 import ListPostItem from "./posts/ListPostItem";
 import Header from "./Header";
 

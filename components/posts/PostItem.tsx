@@ -17,7 +17,6 @@ import Avatar from '../Avatar';
 import Link from 'next/link';
 import { BsFillBookmarkFill,BsBookmark } from 'react-icons/bs';
 import useAddList from '@/hooks/useAddList';
-import usePosts from '@/hooks/usePosts';
 interface PostItemProps {
   data: Record<string, any>;
   userId?: string;
