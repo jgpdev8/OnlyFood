@@ -5,7 +5,6 @@ import { AiFillHeart, AiOutlineHeart, AiOutlineMessage } from 'react-icons/ai';
 import { formatDistanceToNowStrict } from 'date-fns';
 import {AiOutlineDelete} from 'react-icons/ai'
 import {TiLocation} from 'react-icons/ti'
-import {AiOutlineCopy} from 'react-icons/ai'
 
 
 import useLoginModal from '@/hooks/useLoginModal';
@@ -17,6 +16,7 @@ import Avatar from '../Avatar';
 import Link from 'next/link';
 import { BsFillBookmarkFill,BsBookmark } from 'react-icons/bs';
 import useAddList from '@/hooks/useAddList';
+import ImageCloudinaryUpload from '../ImageCloudinaryUpload';
 interface PostItemProps {
   data: Record<string, any>;
   userId?: string;
@@ -30,6 +30,7 @@ const PostItem: React.FC<PostItemProps> = ({ data = {}, userId }) => {
   const { hasLiked,isLoading,toggleLike } = useLike({ postId: data.id, userId});
   const { isListed,isLoadingSave,toggleAddList } = useAddList({ postId: data.id,userId});
   const [abierto, setAbierto] = useState(false);
+ 
 
  
 

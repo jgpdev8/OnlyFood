@@ -12,6 +12,7 @@ import ImageUpload from "../components/ImageUpload";
 
 import Avatar from './Avatar';
 import Button from './Button';
+import ImageCloudinaryUpload from './ImageCloudinaryUpload';
 
 interface FormProps {
   placeholder: string;
@@ -95,7 +96,11 @@ const Form: React.FC<FormProps> = ({ placeholder, isComment, postId }) => {
             <Avatar userId={currentUser?.id} />
           </div>
           <div className="w-full">
-          <ImageUpload value={image} disabled={isLoading} onChange={(image) => setPostImage(image)} label="Sube la imagen de tu comida" />       
+          <ImageCloudinaryUpload
+            value={image}
+            onChange={(value)=> setPostImage(value)}
+          />
+          {/* <ImageUpload value={image} disabled={isLoading} onChange={(image) => setPostImage(image)} label="Sube la imagen de tu comida" />        */}
             <input placeholder="Título" type="text" maxLength={40} 
             onChange={(event) => setTitle(event.target.value)}
             value={title}

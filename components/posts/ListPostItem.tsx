@@ -116,12 +116,9 @@ if (cadena) {
             <Image src={data.image} width={50} height={50} alt="Cover Image" style={{ objectFit: 'cover' }}/>
             )} 
             </div>
-            <div className="text-white mt-1">
-            {data.body}                 
-            </div>  
+              
             
           </div>
-        
           <div className="text-white mt-1 mx-2">
             Ingredientes: 
             {cadenaConSaltosDeLinea}                 
