@@ -28,10 +28,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     let updatedLikedIds = [...(post.likedIds || [])];
-
+    
     if (req.method === 'POST') {
       updatedLikedIds.push(currentUser.id);
-      
+    
       // NOTIFICATION PART START
       try {
         const post = await prisma.post.findUnique({

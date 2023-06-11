@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import OnlyFoodLogo from '../../src/images/OnlyFoodLogo.svg';
+import Image from "next/image";
 
 const SidebarLogo = () => {
   const router = useRouter();
@@ -15,11 +15,11 @@ const SidebarLogo = () => {
         flex 
         items-center 
         justify-center 
-        hover:bg-red-500 
+        hover:bg-orange-500 
         hover:bg-opacity-10 
         cursor-pointer
     ">
-      <img src="https://imageshack.com/i/poHs1LAIp"  height={200} width={200} alt='Logo' />
+      <Image src={'/images/Copia_de_OnlyFoodLogo-removebg-preview.png'}  height={200} width={200} alt='Logo' />
     </div>
   );
 };

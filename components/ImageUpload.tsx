@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
 interface DropzoneProps {
@@ -11,6 +11,10 @@ interface DropzoneProps {
 
 const ImageUpload: React.FC<DropzoneProps> = ({ onChange, label, value, disabled }) => {
   const [base64, setBase64] = useState(value);
+
+  useEffect(()=>{
+    setBase64(value);
+  },[value])
 
   const handleChange = useCallback((base64: string) => {
     onChange(base64);

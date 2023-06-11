@@ -23,6 +23,7 @@ model User {
   hashedPassword  String?
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
+  listIds         String[] @db.ObjectId
   followingIds    String[] @db.ObjectId
   hasNotification Boolean?
 
@@ -34,6 +35,9 @@ model User {
 model Post {
   id                 String @id @default(auto()) @map("_id") @db.ObjectId
   body               String
+  title              String?
+  ingredients        String?
+  location           String?
   createdAt          DateTime @default(now())
   updatedAt          DateTime @updatedAt
   userId             String @db.ObjectId

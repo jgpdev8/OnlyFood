@@ -18,12 +18,12 @@ import Link from 'next/link';
 import { BsFillBookmarkFill,BsBookmark } from 'react-icons/bs';
 import useAddList from '@/hooks/useAddList';
 import usePosts from '@/hooks/usePosts';
-interface PostItemProps {
+interface ListPostItemProps {
   data: Record<string, any>;
   userId?: string;
 }
 
-const PostItem: React.FC<PostItemProps> = ({ data = {}, userId }) => {
+const ListPostItem: React.FC<ListPostItemProps> = ({ data = {}, userId }) => {
   const router = useRouter();
   const loginModal = useLoginModal();
 
@@ -154,111 +154,38 @@ const PostItem: React.FC<PostItemProps> = ({ data = {}, userId }) => {
               {createdAt}
             </span>
           </div>
-          <div className='text-white mt-1 text-[25px]'>
-          {data.title}
-          </div>
-          <div className='text-neutral-300 mt-1 text-[20px] flex gap-2'>   
-          {data.location && (
-            <Link href={locationLink} target='_blank'>{data.location}</Link>
-          )}                  
-          {data.location && (<TiLocation className='text-red-500 w-6 h-6'/>)}          
-          </div>
-          <div className='my-5 grid place-items-center'>
+          <div className='flex flex-row gap-5 mt-10'>
+            <div className='text-white  text-[25px]'>
+            {data.title}
+            </div>
+            <div className='text-neutral-300  text-[25px] flex gap-2'>   
+            {data.location && (
+              <Link href={locationLink} target='_blank'>{data.location}</Link>
+            )}                  
+            {data.location && (<TiLocation className='text-red-500 w-6 h-6'/>)}          
+            </div>
+            <div className=''>
             {data?.image && (
-            <Image src={data.image} width={300} height={300} alt="Cover Image" style={{ objectFit: 'cover' }}/>
+            <Image src={data.image} width={50} height={50} alt="Cover Image" style={{ objectFit: 'cover' }}/>
             )} 
-          </div>
-          <div className="text-white mt-1">
+            </div>
+            <div className="text-white mt-1">
             {data.body}                 
-          </div>  
-          <div className="text-white mt-1">
+            </div>  
+            
+          </div>
+        
+          <div className="text-white mt-1 mx-2">
             Ingredientes: 
             {cadenaConSaltosDeLinea}                 
-          </div>         
-          <div className="flex flex-row items-center mt-3 gap-10">
-            <div 
-              className="
-                flex 
-                flex-row 
-                items-center 
-                text-neutral-500 
-                gap-2 
-                cursor-pointer 
-                transition 
-                hover:text-red-500
-            ">
-              <AiOutlineMessage size={20} />
-              <p>
-                {data.comments?.length || 0}
-              </p>
-            </div>
-            <div
-              onClick={onLike}                                                   
-              className="
-                flex 
-                flex-row 
-                items-center 
-                text-neutral-500 
-                gap-2 
-                cursor-pointer 
-                transition 
-                hover:text-red-500
-            ">
-              <LikeIcon color={hasLiked ? 'red' : ''} size={20} />
-              <p>
-                {data.likedIds.length}
-              </p>              
-            </div>
-            <div
-              onClick={onAddList}
-              className="
-                flex 
-                flex-row 
-                items-center 
-                text-neutral-500 
-                gap-2 
-                cursor-pointer 
-                transition 
-                hover:text-red-500
-            ">
-              <ListedIcon color={isListed ? 'red' : ''} size={18}/>                                        
-            </div>
-            
-            <div 
-            onClick={handleModal}
-            className='
-            flex 
-            flex-row 
-            items-center 
-            text-neutral-500 
-            gap-2 
-            cursor-pointer 
-            transition 
-            hover:text-red-500
-            '>
-              {currentUser?.id == data.user.id && (<AiOutlineDelete size={20}></AiOutlineDelete>)}            
-            </div>
-
-            <div 
-            onClick={handleModal}
-            className='
-            flex 
-            flex-row 
-            items-center 
-            text-neutral-500 
-            gap-2 
-            cursor-pointer 
-            transition 
-            hover:text-red-500
-            '>
-              <AiOutlineCopy size={20}></AiOutlineCopy>           
-            </div>
+          </div>  
+          
           </div>
         </div>
       </div>
-    </div>
+    
     </>
   )
 }
 
-export default PostItem;
+export default ListPostItem;

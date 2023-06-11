@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { toast } from "react-hot-toast";
 
 import useCurrentUser from "./useCurrentUser";
@@ -11,6 +11,7 @@ const useLike = ({ postId, userId }: { postId: string, userId?: string }) => {
   const { data: currentUser } = useCurrentUser();
   const { data: fetchedPost, mutate: mutateFetchedPost } = usePost(postId);
   const { mutate: mutateFetchedPosts } = usePosts(userId);
+  const [isLoading,setIsLoading] = useState(false);
 
   const loginModal = useLoginModal();
 
@@ -27,7 +28,7 @@ const useLike = ({ postId, userId }: { postId: string, userId?: string }) => {
 
     try {
       let request;
-
+      setIsLoading(true);
       if (hasLiked) {
         request = () => axios.delete('/api/like', { data: { postId } });
       } else {
@@ -42,11 +43,15 @@ const useLike = ({ postId, userId }: { postId: string, userId?: string }) => {
     } catch (error) {
       toast.error('Algo fue mal');
     }
-  }, [currentUser, hasLiked, postId, mutateFetchedPosts, mutateFetchedPost, loginModal]);
+    finally{
+      setIsLoading(false);
+    }
+  }, [currentUser, hasLiked, postId, mutateFetchedPosts, mutateFetchedPost, loginModal, isLoading]);
 
   return {
     hasLiked,
     toggleLike,
+    isLoading
   }
 }
 

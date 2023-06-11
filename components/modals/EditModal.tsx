@@ -38,7 +38,7 @@ const EditModal = () => {
       await axios.patch('/api/edit', { name, username, bio, profileImage, coverImage });
       mutateFetchedUser();
 
-      toast.success('Updated');
+      toast.success('Actualizado');
 
       editModal.onClose();
     } catch (error) {
@@ -50,8 +50,8 @@ const EditModal = () => {
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
-      <ImageUpload value={profileImage} disabled={isLoading} onChange={(image) => setProfileImage(image)} label="Upload profile image" />
-      <ImageUpload value={coverImage} disabled={isLoading} onChange={(image) => setCoverImage(image)} label="Upload cover image" />
+      <ImageUpload value={profileImage} disabled={isLoading} onChange={(image) => setProfileImage(image)} label="Sube tu imagen de perfil" />
+      <ImageUpload value={coverImage} disabled={isLoading} onChange={(image) => setCoverImage(image)} label="Sube tu imagen de fondo" />
       <Input
         placeholder="Nombre"
         onChange={(e) => setName(e.target.value)}

@@ -4,7 +4,7 @@ import { ClipLoader } from "react-spinners";
 import usePost from "@/hooks/usePost";
 
 import Header from "@/components/Header";
-import Form from "@/components/Form";
+import FormComment from "@/components/FormComment";
 import PostItem from "@/components/posts/PostItem";
 import CommentFeed from "@/components/posts/CommentFeed";
 
@@ -27,7 +27,7 @@ const PostView = () => {
     <>
       <Header showBackArrow label="Food It!!" />
       <PostItem data={fetchedPost} />
-      <Form postId={postId as string} isComment placeholder="Comparte tu receta" />
+      <FormComment postId={postId as string} isComment placeholder="Comparte tu opinion" />
       <CommentFeed comments={fetchedPost?.comments} />
     </>
    );
