@@ -51,8 +51,17 @@ const EditModal = () => {
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
+      <div className="w-full  flex md:flex-row flex-col gap-4 justify-center">
+      <div className="text-white text-[20px]">
+        Perfil:
       <ImageCloudinaryUpload value={profileImage}  onChange={(image) => setProfileImage(image)}  />
+      </div>
+      <div className="text-white text-[20px]">
+        Banner:
       <ImageCloudinaryUpload value={coverImage}  onChange={(image) => setCoverImage(image)}  />
+
+      </div>
+      </div>
       {/* <ImageUpload value={coverImage} disabled={isLoading} onChange={(image) => setCoverImage(image)} label="Sube tu imagen de fondo" /> */}
       <Input
         placeholder="Nombre"
