@@ -112,7 +112,8 @@ if (cadena) {
     return formatDistanceToNowStrict(new Date(data.createdAt));
     
   }, [data.createdAt])
-
+  
+  
   return (
     <>
     {abierto && (<ConfirmationModal postId={data.id} userId={userId} handleModal={handleModal} />)}
@@ -152,7 +153,7 @@ if (cadena) {
               @{data.user.username}
             </span>
             <span className="text-neutral-500 text-sm">
-              {createdAt}
+              {createdAt?.replace('seconds','segundos').replace('minute','minuto').replace('hour','hora')}
             </span>
           </div>
           <div className='text-white mt-1 text-[25px]'>

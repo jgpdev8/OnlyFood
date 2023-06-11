@@ -98,7 +98,7 @@ if (cadena) {
               @{data.user.username}
             </span>
             <span className="text-neutral-500 text-sm">
-              {createdAt}
+            {createdAt?.replace('seconds','segundos').replace('minute','minuto').replace('hour','hora')}
             </span>
           </div>
           <div className='flex flex-row gap-5 mt-10'>
