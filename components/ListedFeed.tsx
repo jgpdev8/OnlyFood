@@ -9,7 +9,6 @@ const ListedFeed = () => {
   const { data: posts = []} = usePosts();
   const { data: currentUser } = useCurrentUser();
 
-  console.log(currentUser.listIds.length)
   if (currentUser.listIds.length == 0) {
     return (
       <div>
