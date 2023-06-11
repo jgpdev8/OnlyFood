@@ -43,7 +43,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         if (post?.userId) {
           await prisma.notification.create({
             data: {
-              body: 'Alguien le dió me gusta a to FoodIt!',
+              body: '@' + currentUser.username + ' le dió me gusta a to FoodIt!',
               userId: post.userId
             }
           });

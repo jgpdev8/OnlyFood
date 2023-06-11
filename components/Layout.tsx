@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import {BiJoystickButton} from 'react-icons/bi'
+import React, { useEffect, useRef, useState } from 'react';
+import {AiOutlineMenu} from 'react-icons/ai'
 
 import FollowBar from "@/components/layout/FollowBar"
 import Sidebar from "@/components/layout/Sidebar"
@@ -12,6 +12,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const toggleSidebar = () => {
     setSidebarVisible(!sidebarVisible);
   };
+
   return (
     <div className="h-screen bg-black flex">
       <div className="container h-full mx-auto md:w-3/5 w-5/5 overflow-y-auto scrollbar-hide">
@@ -22,7 +23,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             className="md:hidden fixed top-5 left-5 bg-white rounded-full p-2 z-30"
             onClick={toggleSidebar}
           >
-            <BiJoystickButton/>
+            <AiOutlineMenu/>
           </button>
           {sidebarVisible && (
             <div className="fixed top-0 left-0 w-1/3 h-screen bg-neutral-800 z-20">

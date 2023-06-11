@@ -14,6 +14,7 @@ import Avatar from './Avatar';
 import Button from './Button';
 import ImageCloudinaryUpload from './ImageCloudinaryUpload';
 
+
 interface FormProps {
   placeholder: string;
   isComment?: boolean;
@@ -36,9 +37,15 @@ const Form: React.FC<FormProps> = ({ placeholder, isComment, postId }) => {
   const [location,setLocation] = useState('');
   const [ingredients,setIngredients] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [showUpload,setShowUpload] = useState(false);
+
 
  
   const [inputValue, setInputValue] = useState('');
+
+  const toggleUpload = () => {
+    setShowUpload(!showUpload)
+  };
 
   const agregarCadena = () => {
     if (inputValue.trim() !== '') {
@@ -87,141 +94,169 @@ const Form: React.FC<FormProps> = ({ placeholder, isComment, postId }) => {
       setIsLoading(false);
     }
   }, [body,title,locationTmp,location,mutatePosts, isComment, postId, mutatePost,setPostImage]);
-
   return (
-    <div className="border-b-[1px] border-neutral-800 px-5 py-2">
+    
+    <div className="border-b-[1px] border-neutral-800 px-5 py-2 justify-center items-center">
+      
       {currentUser ? (
-        <div className="flex flex-row gap-4">
-          <div>
-            <Avatar userId={currentUser?.id} />
-          </div>
-          <div className="w-full">
-          <ImageCloudinaryUpload
-            value={image}
-            onChange={(value)=> setPostImage(value)}
-          />
-          {/* <ImageUpload value={image} disabled={isLoading} onChange={(image) => setPostImage(image)} label="Sube la imagen de tu comida" />        */}
-            <input placeholder="Título" type="text" maxLength={40} 
-            onChange={(event) => setTitle(event.target.value)}
-            value={title}
-            className=' 
-                peer
-                resize-none 
-                mt-3 
-                w-1/2
-                p-2
-                bg-neutral-500
-                rounded 
-                placeholder:text-white
-                ring-0           
-                text-[20px]      
-                text-white
-                mb-2'/>   
-              <div className='grid grid-cols-2 mt-3 mb-3 gap-4 content-center m-auto text-center align-content-center align-middle'>
-              <input placeholder="Ingredientes" type="text"
-                value={inputValue}
-                onChange={handleInputChange}
-                onKeyDown={handleKeyDown}
-                className=' 
-                peer
-                resize-none                             
-                bg-neutral-500
-                p-2
-                rounded 
-                placeholder:text-white
-                ring-0           
-                text-[20px]      
-                text-white
-                '/>  
-                <AiOutlinePlusCircle onClick={agregarCadena} className='text-white w-8 h-8 cursor-pointer'/>
-              </div>
-              <div className='grid grid-cols-2 mt-3 mb-3 gap-4'>
-              <input placeholder="Ubicación" type="text" maxLength={20} 
-            onChange={(event) => setLocationTmp(event.target.value)}
-            value={locationTmp}
-            className=' 
-                peer
-                resize-none 
-                mt-3                 
-                bg-neutral-500
-                placeholder:text-white
-                p-2
-                rounded 
-                ring-0           
-                text-[20px]      
-                text-white
-                mb-2'/>    
-                {locationTmp!="" && (<input placeholder="Ciudad" type="text" maxLength={20} 
-            onChange={(event) => setLocation(locationTmp +' '+ event.target.value)}           
-            className=' 
-                peer
-                resize-none 
-                mt-3 
-                
-                bg-neutral-500
-                rounded 
-                ring-0           
-                text-[20px]      
-                text-white
-                mb-2'/>                          
-              )}
-                </div>
-                              
-            <textarea
-              disabled={isLoading}
-              onChange={(event) => setBody(event.target.value)}
-              value={body}
-              className="
-                disabled:opacity-80
-                peer
-                resize-none 
-                mt-3 
-                w-full 
-                bg-black 
-                ring-0 
-                outline-none 
-                text-[20px] 
-                placeholder-neutral-500 
-                text-white
-              "
-              placeholder={placeholder}>
-            </textarea>
 
-            <textarea
-              disabled={isLoading}
-              value={ingredients}
-              readOnly
-              className="
-                disabled:opacity-80
-                peer
-                resize-none 
-                mt-3 
-                w-full 
-                bg-black
-                h-48 
-                disabled
-                ring-0 
-                outline-none 
-                text-[20px] 
-                placeholder-neutral-500 
-                text-white
-              "
-              placeholder="Ingredientes">
-            </textarea>
-            <hr 
-              className="
-                opacity-0 
-                peer-focus:opacity-100 
-                h-[1px] 
-                w-full 
-                border-neutral-800 
-                transition"
+        <>          
+          <button className="className='
+           my-4         
+           rounded-full 
+           h-14
+           w-1/2
+           p-4
+           flex
+           items-center
+           justify-center 
+           bg-red-500 
+           text-[20px]
+           hover:bg-opacity-80 
+           transition 
+           cursor-pointer'" onClick={() => setShowUpload(!showUpload)}>
+            {showUpload ? 'Ocultar Formulario' : 'Subir Post'}
+          </button>
+          
+
+          {showUpload && (
+            <div className="flex flex-row gap-4">
+            <div>
+              <Avatar userId={currentUser?.id} />
+            </div>
+            <div className="w-full">
+            <ImageCloudinaryUpload
+              value={image}
+              onChange={(value)=> setPostImage(value)}
             />
-            <div className="mt-4 flex flex-row justify-end">
-              <Button disabled={isLoading || !body} onClick={onSubmit} label="Food It!" />
+            {/* <ImageUpload value={image} disabled={isLoading} onChange={(image) => setPostImage(image)} label="Sube la imagen de tu comida" />        */}
+              <input placeholder="Título" type="text" maxLength={40} 
+              onChange={(event) => setTitle(event.target.value)}
+              value={title}
+              className=' 
+                  peer
+                  resize-none 
+                  mt-3 
+                  w-1/2
+                  p-2
+                  bg-neutral-500
+                  rounded 
+                  placeholder:text-white
+                  ring-0           
+                  text-[20px]      
+                  text-white
+                  mb-2'/>   
+                <div className='grid grid-cols-2 mt-3 mb-3 gap-4 content-center m-auto text-center align-content-center align-middle'>
+                <input placeholder="Ingredientes" type="text"
+                  value={inputValue}
+                  onChange={handleInputChange}
+                  onKeyDown={handleKeyDown}
+                  className=' 
+                  peer
+                  resize-none                             
+                  bg-neutral-500
+                  p-2
+                  rounded 
+                  placeholder:text-white
+                  ring-0           
+                  text-[20px]      
+                  text-white
+                  '/>  
+                  <AiOutlinePlusCircle onClick={agregarCadena} className='text-white w-8 h-8 cursor-pointer'/>
+                </div>
+                <div className='grid grid-cols-2 mt-3 mb-3 gap-4'>
+                <input placeholder="Ubicación" type="text" maxLength={20} 
+              onChange={(event) => setLocationTmp(event.target.value)}
+              value={locationTmp}
+              className=' 
+                  peer
+                  resize-none 
+                  mt-3                 
+                  bg-neutral-500
+                  placeholder:text-white
+                  p-2
+                  rounded 
+                  ring-0           
+                  text-[20px]      
+                  text-white
+                  mb-2'/>    
+                  {locationTmp!="" && (<input placeholder="Ciudad" type="text" maxLength={20} 
+              onChange={(event) => setLocation(locationTmp +' '+ event.target.value)}           
+              className=' 
+                  peer
+                  resize-none 
+                  mt-3 
+                  
+                  bg-neutral-500
+                  rounded 
+                  ring-0           
+                  text-[20px]      
+                  text-white
+                  mb-2'/>                          
+                )}
+                  </div>
+                                
+              <textarea
+                disabled={isLoading}
+                onChange={(event) => setBody(event.target.value)}
+                value={body}
+                className="
+                  disabled:opacity-80               
+                  resize-none 
+                  mt-3 
+                  w-full 
+                  bg-black 
+                  ring-0 
+                  text-[20px] 
+                  placeholder-neutral-500 
+                  text-white
+                "
+                placeholder={placeholder}>
+              </textarea>
+  
+              <textarea
+                disabled={isLoading}
+                value={ingredients}
+                readOnly
+                className="
+                  disabled:opacity-80
+                  peer
+                  resize-none 
+                  mt-3 
+                  w-full 
+                  bg-black
+                  h-48 
+                  disabled
+                  ring-0 
+                  outline-none 
+                  text-[20px] 
+                  placeholder-neutral-500 
+                  text-white
+                "
+                placeholder="Lista de Ingredientes">
+              </textarea>
+              <hr 
+                className="
+                  opacity-0 
+                  peer-focus:opacity-100 
+                  h-[1px] 
+                  w-full 
+                  border-neutral-800 
+                  transition"
+              />
+              <div className="mt-4 flex flex-row justify-end">
+                {!body && (
+                  <div>
+                    la descripción es obligatoria
+                  </div>
+                )}
+                <Button disabled={isLoading || !body} onClick={onSubmit} label="Food It!" />
+              </div>
             </div>
           </div>
-        </div>
+          )}
+        
+        </>
       ) : (
         <div className="py-8">
           <h1 className="text-white text-2xl text-center mb-4 font-bold">Bienvendido a OnlyFood</h1>

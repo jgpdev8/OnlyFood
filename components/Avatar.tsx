@@ -33,11 +33,11 @@ const Avatar: React.FC<AvatarProps> = ({ userId, isLarge, hasBorder }) => {
         hover:opacity-90 
         transition 
         cursor-pointer
-        relative
+        relative       
       `}
     >
       <Image
-        fill
+        fill        
         style={{
           objectFit: 'cover',
           borderRadius: '100%'
