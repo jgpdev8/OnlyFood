@@ -47,15 +47,17 @@ const Form: React.FC<FormProps> = ({ placeholder, isComment, postId }) => {
   };
   
 
-  const handleInputChange = event => {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
   };
+  
 
-  const handleKeyDown = event => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       agregarCadena();
     }
   };
+  
 
   const locationplusCity = () =>{
     setLocation(locationTmp);

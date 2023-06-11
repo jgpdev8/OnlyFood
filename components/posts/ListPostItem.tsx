@@ -33,20 +33,22 @@ const ListPostItem: React.FC<ListPostItemProps> = ({ data = {}, userId }) => {
 
   const cadena = data.ingredients;
 
-  let cadenaConSaltosDeLinea ;
-  if (cadena) {
-    cadenaConSaltosDeLinea = cadena
-      .trim()
-      .split('-')
-      .filter(item => item !== '')
-      .map((item, index) => (
-        <li key={index}>
-          {item.replace(/(?:^|\s)\S/g, char => char.toUpperCase())}
-        </li>
-      ));
-  } else {
-    cadenaConSaltosDeLinea = <li>Cadena vacía</li>;
-  }
+  let cadenaConSaltosDeLinea: JSX.Element[] | React.ReactNode;
+
+if (cadena) {
+  cadenaConSaltosDeLinea = cadena
+    .trim()
+    .split('-')
+    .filter((item: string) => item !== '')
+    .map((item: string, index: number) => (
+      <li key={index}>
+        {item.replace(/(?:^|\s)\S/g, (char: string) => char.toUpperCase())}
+      </li>
+    ));
+} else {
+  cadenaConSaltosDeLinea = <li>Cadena vacía</li>;
+}
+
   
 
 
