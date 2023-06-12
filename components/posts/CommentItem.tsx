@@ -61,7 +61,7 @@ const CommentItem: React.FC<CommentItemProps> = ({ data = {} }) => {
               @{data.user.username}
             </span>
             <span className="text-neutral-500 text-sm">
-              {createdAt}
+            {createdAt?.replace('seconds','segundos').replace('minute','minuto').replace('hour','hora')}
             </span>
           </div>
           <div className="text-white mt-1">

@@ -60,7 +60,7 @@ const LoginModal = () => {
 
   const footerContent = (
     <div className="text-neutral-400 text-center mt-4">
-      <p>Primera vez usando OnlyFood?
+      <p>¿Primera vez usando OnlyFood?
         <span 
           onClick={onToggle} 
           className="
