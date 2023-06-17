@@ -80,7 +80,15 @@ const PostItem: React.FC<PostItemProps> = ({ data = {}, userId }) => {
     }    
   }
 
+
   let locationLink = 'https://www.google.com/maps?q=' + data.location;
+
+  const goLocation = (ev:any) => {
+    ev.stopPropagation();
+    window.open(locationLink)
+  }
+
+  
 
   const cadena = data.ingredients;
 
@@ -160,13 +168,16 @@ if (cadena) {
           <div className='text-white mt-1 text-[25px]'>
           {data.title}
           </div>
-          <div className='text-neutral-300 mt-1 text-[20px] flex gap-2'>   
-          {data.location && (
+          <div 
+          onClick={goLocation}
+          className='text-neutral-300 mt-1 text-[20px] flex gap-2'>   
+          {/* {data.location && (
             <Link href={locationLink} target='_blank'>{data.location}</Link>
-          )}                  
+          )}                   */}
+          {data.location}
           {data.location && (<TiLocation className='text-red-500 w-6 h-6'/>)}          
           </div>
-          <div className='my-5 grid place-items-center'>
+          <div className='my-5'>
             {data?.image && (
             <Image src={data.image} width={300} height={300} alt="Cover Image" style={{ objectFit: 'cover' }}/>
             )} 
