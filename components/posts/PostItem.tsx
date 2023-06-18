@@ -5,6 +5,7 @@ import { AiFillHeart, AiOutlineHeart, AiOutlineMessage } from 'react-icons/ai';
 import { formatDistanceToNowStrict } from 'date-fns';
 import {AiOutlineDelete} from 'react-icons/ai'
 import {TiLocation} from 'react-icons/ti'
+import {MdOutlineReport,MdReport} from 'react-icons/md'
 
 
 import useLoginModal from '@/hooks/useLoginModal';
@@ -17,6 +18,7 @@ import Link from 'next/link';
 import { BsFillBookmarkFill,BsBookmark } from 'react-icons/bs';
 import useAddList from '@/hooks/useAddList';
 import ImageCloudinaryUpload from '../ImageCloudinaryUpload';
+import useReport from '@/hooks/useReport';
 interface PostItemProps {
   data: Record<string, any>;
   userId?: string;
@@ -28,6 +30,7 @@ const PostItem: React.FC<PostItemProps> = ({ data = {}, userId }) => {
 
   const { data: currentUser } = useCurrentUser();
   const { hasLiked,isLoading,toggleLike } = useLike({ postId: data.id, userId});
+  const { hasReported,isLoadingReport,toggleReport } = useReport({ postId: data.id, userId});
   const { isListed,isLoadingSave,toggleAddList } = useAddList({ postId: data.id,userId});
   const [abierto, setAbierto] = useState(false);
  
@@ -59,6 +62,19 @@ const PostItem: React.FC<PostItemProps> = ({ data = {}, userId }) => {
 
     
   }, [loginModal, currentUser, toggleLike]);
+
+  const onReport = useCallback(async (ev:any) => {
+    ev.stopPropagation();
+
+    if(!currentUser) {
+      return loginModal.onOpen();
+    }
+
+    if(!isLoadingReport){
+      toggleReport();
+    }
+
+  },[loginModal,currentUser, toggleReport])
 
   const onAddList = useCallback(async (ev: any) => {
     ev.stopPropagation();
@@ -105,14 +121,13 @@ if (cadena) {
         {item.replace(/(?:^|\s)\S/g, (char: string) => char.toUpperCase())}
       </li>
     ));
-} else {
-  cadenaConSaltosDeLinea = <li>Cadena vacía</li>;
 }
 
   
 
   const LikeIcon = hasLiked ? AiFillHeart : AiOutlineHeart;
   const ListedIcon = isListed ? BsFillBookmarkFill : BsBookmark;
+  const ReportedIcon = hasReported ? MdReport : MdOutlineReport;
 
   const createdAt = useMemo(() => {
     if (!data?.createdAt) {
@@ -184,11 +199,13 @@ if (cadena) {
           </div>
           <div className="text-white mt-1">
             {data.body}                 
-          </div>  
-          <div className="text-white mt-1">
-            Ingredientes: 
-            {cadenaConSaltosDeLinea}                 
-          </div>         
+          </div>
+          {cadena && (
+              <div className="text-white mt-1">            
+              Ingredientes: 
+              {cadenaConSaltosDeLinea}                 
+              </div> 
+              )}                    
           <div className="flex flex-row items-center mt-3 gap-10">
             <div 
               className="
@@ -237,7 +254,7 @@ if (cadena) {
             ">
               <ListedIcon color={isListed ? 'red' : ''} size={18}/>                                        
             </div>
-            
+            {currentUser?.id == data.user.id && (
             <div 
             onClick={handleModal}
             className='
@@ -250,8 +267,26 @@ if (cadena) {
             transition 
             hover:text-red-500
             '>
-              {currentUser?.id == data.user.id && (<AiOutlineDelete size={20}></AiOutlineDelete>)}            
+              <AiOutlineDelete size={20}></AiOutlineDelete>         
             </div>
+            )}   
+
+            {currentUser?.id != data.user.id && (
+            <div 
+            onClick={onReport}
+            className='
+            flex 
+            flex-row 
+            items-center 
+            text-neutral-500 
+            gap-2 
+            cursor-pointer 
+            transition 
+            hover:text-red-500
+            '>
+              <ReportedIcon color={hasReported ? 'red' : ''} size={20}></ReportedIcon>           
+            </div>
+            )}
           </div>
         </div>
       </div>
