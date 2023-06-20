@@ -177,7 +177,7 @@ if (cadena) {
               @{data.user.username}
             </span>
             <span className="text-neutral-500 text-sm">
-              {createdAt?.replace('seconds','segundos').replace('minute','minuto').replace('hour','hora')}
+              {createdAt?.replace('seconds','segundos').replace('minute','minuto').replace('hour','hora').replace('day','día')}
             </span>
           </div>
           <div className='text-white mt-1 text-[25px]'>
